@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Expression Converter',
+  title: 'Mahdi Cheraghi',
   description: 'Convert infix, prefix, and postfix expressions effortlessly.',
 };
 
