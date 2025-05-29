@@ -90,7 +90,7 @@ export const infixToPrefix = (infix: string): string => {
   }
 };
 
-const prefixToInfix = (prefix: string): string => {
+export const prefixToInfix = (prefix: string): string => {
   if (!prefix.trim()) return "";
   const stack: string[] = [];
   const sanitizedPrefix = prefix.replace(/\s+/g, '').split('').reverse();
@@ -117,7 +117,7 @@ export const prefixToPostfix = (prefix: string): string => {
   return infixToPostfix(infix);
 };
 
-const postfixToInfix = (postfix: string): string => {
+export const postfixToInfix = (postfix: string): string => {
   if (!postfix.trim()) return "";
   const stack: string[] = [];
   const sanitizedPostfix = postfix.replace(/\s+/g, '');

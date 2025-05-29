@@ -15,19 +15,25 @@ import {
   infixToPrefix,
   prefixToPostfix,
   postfixToPrefix,
+  postfixToInfix, // Added import
+  prefixToInfix,   // Added import
 } from '@/lib/conversion';
 
 type ConversionType =
   | 'infix-to-prefix'
   | 'infix-to-postfix'
   | 'prefix-to-postfix'
-  | 'postfix-to-prefix';
+  | 'postfix-to-prefix'
+  | 'postfix-to-infix' // Added type
+  | 'prefix-to-infix';  // Added type
 
 const conversionOptions: { value: ConversionType; label: string }[] = [
   { value: 'infix-to-postfix', label: 'Infix to Postfix' },
   { value: 'infix-to-prefix', label: 'Infix to Prefix' },
   { value: 'prefix-to-postfix', label: 'Prefix to Postfix' },
   { value: 'postfix-to-prefix', label: 'Postfix to Prefix' },
+  { value: 'postfix-to-infix', label: 'Postfix to Infix' }, // Added option
+  { value: 'prefix-to-infix', label: 'Prefix to Infix' },   // Added option
 ];
 
 const ExpressionConverter: FC = () => {
@@ -62,11 +68,17 @@ const ExpressionConverter: FC = () => {
         case 'postfix-to-prefix':
           result = postfixToPrefix(inputValue);
           break;
+        case 'postfix-to-infix': // Added case
+          result = postfixToInfix(inputValue);
+          break;
+        case 'prefix-to-infix':   // Added case
+          result = prefixToInfix(inputValue);
+          break;
         default:
           throw new Error('Invalid conversion type selected.');
       }
       setOutputValue(result);
-      if (result) { // Only show output card if there's a result
+      if (result) { 
         setShowOutput(true);
       }
     } catch (e) {
@@ -78,12 +90,10 @@ const ExpressionConverter: FC = () => {
     }
   };
   
-  // Effect to trigger animation when outputValue is set
   useEffect(() => {
     if (outputValue) {
       setShowOutput(true);
     } else {
-      // If output becomes empty (e.g. input cleared), hide the output card
       setShowOutput(false);
     }
   }, [outputValue]);
