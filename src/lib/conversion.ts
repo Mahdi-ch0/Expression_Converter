@@ -1,3 +1,4 @@
+
 // src/lib/conversion.ts
 
 const getPrecedence = (op: string): number => {
@@ -99,7 +100,7 @@ export const prefixToInfix = (prefix: string): string => {
     if (isOperand(char)) {
       stack.push(char);
     } else if (isOperator(char)) {
-      if (stack.length < 2) throw new Error("Invalid prefix expression: insufficient operands for operator.");
+      if (stack.length < 2) throw new Error("Invalid prefix expression: Operator found without enough subsequent operands. Ensure operators are followed by two operands or valid sub-expressions.");
       const op1 = stack.pop()!;
       const op2 = stack.pop()!;
       stack.push(`(${op1}${char}${op2})`);
@@ -107,7 +108,7 @@ export const prefixToInfix = (prefix: string): string => {
       throw new Error(`Invalid character in prefix expression: ${char}`);
     }
   }
-  if (stack.length !== 1) throw new Error("Invalid prefix expression format.");
+  if (stack.length !== 1) throw new Error("Invalid prefix expression format: The expression structure is incorrect. This often means an imbalance of operands and operators, or it's not valid prefix notation.");
   return stack[0]!;
 };
 
@@ -126,7 +127,7 @@ export const postfixToInfix = (postfix: string): string => {
     if (isOperand(char)) {
       stack.push(char);
     } else if (isOperator(char)) {
-      if (stack.length < 2) throw new Error("Invalid postfix expression: insufficient operands for operator.");
+      if (stack.length < 2) throw new Error("Invalid postfix expression: Operator found without enough preceding operands. Ensure operators have two preceding operands.");
       const op2 = stack.pop()!;
       const op1 = stack.pop()!;
       stack.push(`(${op1}${char}${op2})`);
@@ -134,7 +135,7 @@ export const postfixToInfix = (postfix: string): string => {
       throw new Error(`Invalid character in postfix expression: ${char}`);
     }
   }
-  if (stack.length !== 1) throw new Error("Invalid postfix expression format.");
+  if (stack.length !== 1) throw new Error("Invalid postfix expression format: The expression structure is incorrect. This often means an imbalance of operands and operators, or it's not valid postfix notation.");
   return stack[0]!;
 };
 
