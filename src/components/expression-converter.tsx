@@ -91,7 +91,7 @@ const ExpressionConverter: FC = () => {
 
   return (
     <div className="container mx-auto py-8 px-4 flex flex-col items-center min-h-screen">
-      <h1 className="text-4xl font-bold mb-8 text-primary">Mahdi Cheraghi</h1>
+      <h1 className="text-4xl font-bold mb-8 text-[hsl(var(--mahdi-brand-color))]">Mahdi Cheraghi</h1>
 
       {error && (
         <Alert variant="destructive" className="mb-6 w-full max-w-lg animate-in fade-in-0 duration-300">
